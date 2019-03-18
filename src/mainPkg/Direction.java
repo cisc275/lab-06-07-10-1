@@ -1,4 +1,4 @@
-package mainPgk;
+package mainPkg;
 
 public enum Direction {
 

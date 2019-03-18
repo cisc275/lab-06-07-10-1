@@ -1,4 +1,4 @@
-package mainPgk;
+package mainPkg;
 
 public enum EOrc {
 	north ("orc_animation/orc_forward_north.png"), 
