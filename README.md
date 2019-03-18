@@ -9,5 +9,7 @@ lab6 and lab7
 3. add a JButton that toggles the orc movement when you press it:
 
     expand the frame to have space for the button
+    
     make the button which toggles a bool
+    
     if the bool is true (orc is stopped), don't run [x,y]loc += [x,y]Vel in Model.java
