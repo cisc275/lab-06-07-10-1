@@ -21,7 +21,7 @@ public class Controller {
 			//increment the x and y coordinates, alter direction if necessary
 			model.updateLocationAndDirection();
 			//update the view
-			view.update(model.getX(), model.getY(), model.getDirect());
+			view.update(model.getX(), model.getY(), model.getDirect(),model.getStopMoving());
 		}
 	}
 }

@@ -19,7 +19,8 @@ public class Model{
 	int height;
 	int imgWidth;
 	int imgHeight;
-	final static int yBuffer = 25; //improves visual collision 
+	final static int yBuffer = 25; //improves visual collision
+	static boolean stopMoving = false;
 
 	public Model(int w, int h, int iw, int ih) {
 		width = w;
@@ -32,15 +33,20 @@ public class Model{
 	}
 
 	public void updateLocationAndDirection() {
-		if(xloc < 0 || xloc > width - imgWidth) {
-			xVel *= -1;
+		if (stopMoving) {
+			
 		}
-		if(yloc + yBuffer < 0 || yloc + yBuffer > height - imgHeight) {
-			yVel *= -1;
+		else {
+			if(xloc < 0 || xloc > width - imgWidth) {
+				xVel *= -1;
+			}
+			if(yloc + yBuffer < 0 || yloc + yBuffer > height - imgHeight) {
+				yVel *= -1;
+			}
+			updateDirection();
+			xloc += xVel;
+			yloc += yVel;
 		}
-		updateDirection();
-		xloc += xVel;
-		yloc += yVel;
 	}
 	
 	public int getX() {
@@ -50,8 +56,17 @@ public class Model{
 	public int getY() {
 		return yloc;
 	}
+	
 	public Direction getDirect() {
 		return dir;
+	}
+	
+	public boolean getStopMoving() {
+		return stopMoving;
+	}
+	
+	public static void changeMoving() {
+		stopMoving ^= true;
 	}
 
 	public void updateDirection() {

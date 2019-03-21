@@ -1,11 +1,14 @@
 package mainPkg;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -34,6 +37,7 @@ public class View extends JPanel{
     final static int frameHeight = 300;
     final static int imgWidth = 165;
     final static int imgHeight = 165;
+    String buttonText = "Stop Movement";
 
 	//Constructor: get image, segment and store in array
 	public View() { 
@@ -46,6 +50,24 @@ public class View extends JPanel{
 		}
 		//make frame
 		frame = new JFrame();
+	JButton b = new JButton(buttonText);
+    	b.setBounds(0, 225, 150, 50);
+    	b.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if (buttonText == "Stop Movement") {
+				b.setText("Start Movement");
+				buttonText = "Start Movement";
+			}
+			else {
+				b.setText("Stop Movement");
+				buttonText = "Stop Movement";
+			}
+			
+			Model.changeMoving();
+		}
+    		
+    	});
+    	frame.add(b);
     	frame.getContentPane().add(this);
     	frame.setBackground(Color.gray);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +88,16 @@ public class View extends JPanel{
 		return imgHeight;
 	}
 
-	public void update(int x, int y, Direction dir){
+	public void update(int x, int y, Direction dir, boolean stoppedMovement){
+		if (stoppedMovement) {
+			try {
+				frame.repaint();
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}	
+		}
+		else {
 		xLoc = x;
 		yLoc = y;
 		picNum = (picNum + 1) % frameCount;
@@ -89,6 +120,7 @@ public class View extends JPanel{
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
 		}
 	}
 	
