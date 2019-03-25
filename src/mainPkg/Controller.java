@@ -1,5 +1,10 @@
 package mainPkg;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
 /**
  * Do not modify this file without permission from your TA.
  **/
@@ -16,6 +21,23 @@ public class Controller {
 	
         //run the simulation
 	public void start(){
+		JButton b = view.getButton();
+		b.setBounds(0, 225, 150, 50);
+    	b.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if (view.getButtonText().equals("Stop Movement")) {
+				b.setText("Start Movement");
+				view.setButtonText("Start Movement");
+			}
+			else {
+				b.setText("Stop Movement");
+				view.setButtonText("Stop Movement");
+			}
+			
+			Model.changeMoving();
+		}
+    		
+    	});
 		for(int i = 0; i < 5000; i++)
 		{
 			//increment the x and y coordinates, alter direction if necessary

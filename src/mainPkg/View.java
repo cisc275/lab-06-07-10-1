@@ -31,10 +31,11 @@ public class View extends JPanel{
     int xLoc;
     int yLoc;
     static JFrame frame;
+    JButton b;
     final static int xIncr = 8; 
     final static int yIncr = 2; 
     final static int frameWidth = 500;
-    final static int frameHeight = 300;
+    final static int frameHeight = 325;
     final static int imgWidth = 165;
     final static int imgHeight = 165;
     String buttonText = "Stop Movement";
@@ -50,23 +51,7 @@ public class View extends JPanel{
 		}
 		//make frame
 		frame = new JFrame();
-	JButton b = new JButton(buttonText);
-    	b.setBounds(0, 225, 150, 50);
-    	b.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			if (buttonText == "Stop Movement") {
-				b.setText("Start Movement");
-				buttonText = "Start Movement";
-			}
-			else {
-				b.setText("Stop Movement");
-				buttonText = "Stop Movement";
-			}
-			
-			Model.changeMoving();
-		}
-    		
-    	});
+		b = new JButton(buttonText);
     	frame.add(b);
     	frame.getContentPane().add(this);
     	frame.setBackground(Color.gray);
@@ -74,7 +59,9 @@ public class View extends JPanel{
     	frame.setSize(frameWidth, frameHeight);
     	frame.setVisible(true);
 	}
-
+	public JButton getButton() {
+		return b;
+	}
 	public int getWidth(){
 		return frameWidth;
 	}
@@ -86,6 +73,12 @@ public class View extends JPanel{
 	}
 	public int getImageHeight(){
 		return imgHeight;
+	}
+	public String getButtonText() {
+		return buttonText;
+	}
+	public void setButtonText(String s) {
+		buttonText = s;
 	}
 
 	public void update(int x, int y, Direction dir, boolean stoppedMovement){
