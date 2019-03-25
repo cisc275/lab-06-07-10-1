@@ -2,6 +2,8 @@ package mainPkg;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 
@@ -9,7 +11,7 @@ import javax.swing.JButton;
  * Do not modify this file without permission from your TA.
  **/
 
-public class Controller {
+public class Controller implements KeyListener{
 
 	private Model model;
 	private View view;
@@ -45,5 +47,22 @@ public class Controller {
 			//update the view
 			view.update(model.getX(), model.getY(), model.getDirect(),model.getStopMoving());
 		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
 	}
 }
