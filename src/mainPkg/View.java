@@ -34,7 +34,7 @@ public class View extends JPanel{
     final static int xIncr = 8; 
     final static int yIncr = 2; 
     final static int frameWidth = 500;
-    final static int frameHeight = 300;
+    final static int frameHeight = 325;
     final static int imgWidth = 165;
     final static int imgHeight = 165;
     String buttonText = "Stop Movement";
@@ -50,22 +50,20 @@ public class View extends JPanel{
 		}
 		//make frame
 		frame = new JFrame();
-	JButton b = new JButton(buttonText);
+		JButton b = new JButton(buttonText);
     	b.setBounds(0, 225, 150, 50);
     	b.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			if (buttonText == "Stop Movement") {
-				b.setText("Start Movement");
-				buttonText = "Start Movement";
-			}
-			else {
-				b.setText("Stop Movement");
-				buttonText = "Stop Movement";
-			}
-			
-			Model.changeMoving();
-		}
-    		
+    		public void actionPerformed(ActionEvent e) {
+    			if (buttonText == "Stop Movement") {
+    				b.setText("Start Movement");
+    				buttonText = "Start Movement";
+    			}
+    			else {
+    				b.setText("Stop Movement");
+    				buttonText = "Stop Movement";
+    			}
+    			Model.changeMoving();
+    		}
     	});
     	frame.add(b);
     	frame.getContentPane().add(this);
