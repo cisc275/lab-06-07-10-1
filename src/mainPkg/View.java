@@ -39,6 +39,8 @@ public class View extends JPanel{
     final static int imgWidth = 165;
     final static int imgHeight = 165;
     String buttonText = "Stop Movement";
+    boolean fireFlag = false;
+    boolean jumpFlag = false;
 
 	//Constructor: get image, segment and store in array
 	public View() { 
@@ -80,6 +82,22 @@ public class View extends JPanel{
 	public void setButtonText(String s) {
 		buttonText = s;
 	}
+	public void setFireFlag() {
+		if(fireFlag) {
+			fireFlag = false;
+		}
+		else {
+			fireFlag = true;
+		}
+	}
+	public void setJumpFlag() {
+		if(jumpFlag) {
+			jumpFlag = false;
+		}
+		else {
+			jumpFlag = true;
+		}
+	}
 
 	public void update(int x, int y, Direction dir, boolean stoppedMovement){
 		if (stoppedMovement) {
@@ -91,38 +109,49 @@ public class View extends JPanel{
 			}	
 		}
 		else {
-		xLoc = x;
-		yLoc = y;
-		picNum = (picNum + 1) % frameCount;
-		//Direction -> EOrc
-		//I would rather this be inside one the the enums or just have a single enum, but apparently the code for it has to be 
-		//here so let's go with this for now
-		switch(dir) {
-		case NORTH: currentOrc = EOrc.north; break;
-		case NORTHEAST: currentOrc = EOrc.northEast; break;
-		case EAST: currentOrc = EOrc.east; break;
-		case SOUTHEAST: currentOrc = EOrc.southEast; break;
-		case SOUTH: currentOrc = EOrc.south; break;
-		case SOUTHWEST: currentOrc = EOrc.southWest; break;
-		case WEST: currentOrc = EOrc.west; break;
-		case NORTHWEST: currentOrc = EOrc.northWest; break;
-		}
-		
-		try {
-			frame.repaint();
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			xLoc = x;
+			yLoc = y;
+			picNum = (picNum + 1) % frameCount;
+			//Direction -> EOrc
+			//I would rather this be inside one the the enums or just have a single enum, but apparently the code for it has to be 
+			//here so let's go with this for now
+			switch(dir) {
+			case NORTH: currentOrc = EOrc.north; break;
+			case NORTHEAST: currentOrc = EOrc.northEast; break;
+			case EAST: currentOrc = EOrc.east; break;
+			case SOUTHEAST: currentOrc = EOrc.southEast; break;
+			case SOUTH: currentOrc = EOrc.south; break;
+			case SOUTHWEST: currentOrc = EOrc.southWest; break;
+			case WEST: currentOrc = EOrc.west; break;
+			case NORTHWEST: currentOrc = EOrc.northWest; break;
+			}
+			
+			try {
+				frame.repaint();
+				Thread.sleep(100);
+			} 
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	//Read image from file and return
 	private BufferedImage createImage(EOrc orc){
 		try {
-			BufferedImage bufferedImage = ImageIO.read(new File(orc.getFile()));
+			BufferedImage bufferedImage;
+			if(fireFlag) {
+				bufferedImage = ImageIO.read(new File("orc_animation/orc_fire_southeast.png"));
+			}
+			else if(jumpFlag) {
+				bufferedImage = ImageIO.read(new File("orc_animation/orc_jump_southeast.png"));
+			}
+			else {
+				bufferedImage = ImageIO.read(new File(orc.getFile()));
+			}
 			return bufferedImage;
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;

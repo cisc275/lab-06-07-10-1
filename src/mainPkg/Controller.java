@@ -63,6 +63,15 @@ public class Controller implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		if(e.getKeyCode() == 70) {
+			//KeyCode for 'F'
+			view.setFireFlag();
+			
+		}
+		else if(e.getKeyCode() == 74) {
+			//KeyCode for 'J'
+			view.setJumpFlag();
+			
+		}
 	}
 }
