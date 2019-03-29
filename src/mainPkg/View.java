@@ -46,7 +46,7 @@ public class View extends JPanel{
 		pics = new BufferedImage[EOrc.values().length][frameCount];
 		for (EOrc orc : EOrc.values()) {
 			BufferedImage img = createImage(orc);
-			for (int frameNum = 0; frameNum < frameCount; frameNum++)
+			for (int frameNum = 0; frameNum < orc.getframeCount(); frameNum++)
 				pics[orc.ordinal()][frameNum] = img.getSubimage(imgWidth * frameNum, 0, imgWidth, imgHeight);
 		}
 		//make frame
@@ -81,7 +81,8 @@ public class View extends JPanel{
 		buttonText = s;
 	}
 
-	public void update(int x, int y, Direction dir, boolean stoppedMovement){
+	public void update(int x, int y, Direction dir, boolean stoppedMovement, boolean firing){
+		
 		if (stoppedMovement) {
 			try {
 				frame.repaint();
@@ -90,6 +91,27 @@ public class View extends JPanel{
 				e.printStackTrace();
 			}	
 		}
+		
+		if (firing) {
+			switch (dir) {
+			case NORTH: currentOrc = EOrc.fireNorth; break;
+			case NORTHEAST: currentOrc = EOrc.fireNorthEast; break;
+			case EAST: currentOrc = EOrc.fireEast; break;
+			case SOUTHEAST: currentOrc = EOrc.fireSouthEast; break;
+			case SOUTH: currentOrc = EOrc.fireSouth; break;
+			case SOUTHWEST: currentOrc = EOrc.fireSouthWest; break;
+			case WEST: currentOrc = EOrc.fireWest; break;
+			case NORTHWEST: currentOrc = EOrc.fireNorthWest; break;
+			}
+			try {
+				frame.repaint();
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+
 		else {
 		xLoc = x;
 		yLoc = y;

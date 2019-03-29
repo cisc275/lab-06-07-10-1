@@ -45,8 +45,10 @@ public class Controller implements KeyListener{
 			//increment the x and y coordinates, alter direction if necessary
 			model.updateLocationAndDirection();
 			//update the view
-			view.update(model.getX(), model.getY(), model.getDirect(),model.getStopMoving());
+			view.update(model.getX(), model.getY(), model.getDirect(),model.getStopMoving(), model.getFiring());
+			
 		}
+
 	}
 
 	@Override
@@ -63,6 +65,10 @@ public class Controller implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		if (e.getKeyCode() == KeyEvent.VK_F) {
+			Model.changeFiring();
+			view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring());
+			Model.changeFiring();
+		}
 	}
 }

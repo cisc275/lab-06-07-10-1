@@ -21,6 +21,7 @@ public class Model{
 	int imgHeight;
 	final static int yBuffer = 25; //improves visual collision
 	static boolean stopMoving = false;
+	static boolean firing = false;
 
 	public Model(int w, int h, int iw, int ih) {
 		width = w;
@@ -63,6 +64,14 @@ public class Model{
 	
 	public boolean getStopMoving() {
 		return stopMoving;
+	}
+	
+	public boolean getFiring() {
+		return firing;
+	}
+	
+	public static void changeFiring() {
+		firing ^= true;
 	}
 	
 	public static void changeMoving() {
