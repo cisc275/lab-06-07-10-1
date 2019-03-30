@@ -110,24 +110,8 @@ public class View extends JPanel{
 				e.printStackTrace();
 			}
 		}
-		else if(jumping) {
-			switch (dir) {
-			case NORTH: currentOrc = EOrc.jumpNorth; break;
-			case NORTHEAST: currentOrc = EOrc.jumpNorthEast; break;
-			case EAST: currentOrc = EOrc.jumpEast; break;
-			case SOUTHEAST: currentOrc = EOrc.jumpSouthEast; break;
-			case SOUTH: currentOrc = EOrc.jumpSouth; break;
-			case SOUTHWEST: currentOrc = EOrc.jumpSouthWest; break;
-			case WEST: currentOrc = EOrc.jumpWest; break;
-			case NORTHWEST: currentOrc = EOrc.jumpNorthWest; break;
-			}
-			try {
-				frame.repaint();
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+		
+
 		else {
 		xLoc = x;
 		yLoc = y;
