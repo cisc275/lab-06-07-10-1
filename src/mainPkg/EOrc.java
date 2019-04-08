@@ -1,23 +1,51 @@
 package mainPkg;
 
 public enum EOrc {
-	north ("orc_animation/orc_forward_north.png"), 
-	northEast ("orc_animation/orc_forward_northeast.png"), 
-	east ("orc_animation/orc_forward_east.png"), 
-	southEast ("orc_animation/orc_forward_southeast.png"),  
-	south ("orc_animation/orc_forward_south.png"), 
-	southWest ("orc_animation/orc_forward_southwest.png"),  
-	west ("orc_animation/orc_forward_west.png"), 
-	northWest ("orc_animation/orc_forward_northwest.png");
+	north ("orc_animation/orc_forward_north.png", 10), 
+	northEast ("orc_animation/orc_forward_northeast.png", 10), 
+	east ("orc_animation/orc_forward_east.png", 10), 
+	southEast ("orc_animation/orc_forward_southeast.png", 10),  
+	south ("orc_animation/orc_forward_south.png", 10), 
+	southWest ("orc_animation/orc_forward_southwest.png", 10),  
+	west ("orc_animation/orc_forward_west.png", 10), 
+	northWest ("orc_animation/orc_forward_northwest.png", 10),
+	
+	fireNorth ("orc_animation/orc_fire_north.png", 4),
+	fireNorthEast("orc_animation/orc_fire_northeast.png", 4),
+	fireEast("orc_animation/orc_fire_east.png", 4),
+	fireSouthEast ("orc_animation/orc_fire_southeast.png", 4),
+	fireSouth ("orc_animation/orc_fire_south.png", 4), 
+	fireSouthWest ("orc_animation/orc_fire_southwest.png", 4),  
+	fireWest ("orc_animation/orc_fire_west.png", 4), 
+	fireNorthWest ("orc_animation/orc_fire_northwest.png", 4),
+	
+	jumpNorth ("orc_animation/orc_jump_north.png", 8),
+	jumpNorthEast ("orc_animation/orc_jump_northeast.png", 8),
+	jumpEast ("orc_animation/orc_jump_east.png", 8),
+	jumpSouthEast ("orc_animation/orc_jump_southeast.png", 8),
+	jumpSouth ("orc_animation/orc_jump_south.png", 8),
+	jumpSouthWest ("orc_animation/orc_jump_southwest.png", 8),
+	jumpWest ("orc_animation/orc_jump_west.png", 8),
+	jumpNorthWest ("orc_animation/orc_jump_northwest.png", 8);
+	
+	
 	
 	private final String file;
+	private final int frameCount;
 	
-	EOrc(String file) {
+	EOrc(String file, int frameCount) {
 		this.file = file;
+		this.frameCount = frameCount;
 	}
+	
 	public String getFile() {
 		return file;
 	}
+	
+	public int getframeCount() {
+		return frameCount;
+	}
+
 	
 //	//returns a diagonal moving EOrc
 //	public static EOrc selectOrc(boolean right, boolean down) {

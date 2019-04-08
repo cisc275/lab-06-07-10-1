@@ -35,7 +35,10 @@ public class Model{
 	}
 
 	public void updateLocationAndDirection() {
-		if(!stopMoving){
+		if (stopMoving) {
+			
+		}
+		else {
 			if(xloc < 0 || xloc > width - imgWidth) {
 				xVel *= -1;
 			}
@@ -66,10 +69,6 @@ public class Model{
 	
 	public boolean getFiring() {
 		return firing;
-	}
-
-	public boolean getJumping() {
-		return jumping;
 	}
 	
 	public static void changeFiring() {

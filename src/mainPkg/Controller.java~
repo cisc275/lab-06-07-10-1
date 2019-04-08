@@ -6,13 +6,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
 /**
  * Do not modify this file without permission from your TA.
  **/
 
-public class Controller{
+public class Controller implements KeyListener{
 
 	private Model model;
 	private View view;
@@ -39,45 +38,40 @@ public class Controller{
 			
 			Model.changeMoving();
 		}
-    	});
-    	JFrame f = view.getFrame();
-    	f.addKeyListener(new KeyListener() {
-    		@Override
-    		public void keyReleased(KeyEvent arg0) {
-    			// TODO Auto-generated method stub
-    			
-    		}
-
-    		@Override
-    		public void keyTyped(KeyEvent e) {
-    			// TODO Auto-generated method stub
-    			
-    		}
     		
-    		@Override
-    		public void keyPressed(KeyEvent e) {
-    			if (e.getKeyCode() == KeyEvent.VK_F) {
-    				Model.changeFiring();
-    				view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring(), model.getJumping());
-    				//Model.changeFiring();
-    			}
-    			else if(e.getKeyCode() == KeyEvent.VK_SPACE){
-    				Model.changeJumping();
-    				view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring(), model.getJumping());
-    				//Model.changeJumping();
-    			}
-    		}
     	});
 		for(int i = 0; i < 5000; i++)
 		{
 			//increment the x and y coordinates, alter direction if necessary
 			model.updateLocationAndDirection();
 			//update the view
-			view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring(), model.getJumping());
+			view.update(model.getX(), model.getY(), model.getDirect(),model.getStopMoving(), model.getFiring());
 			
 		}
 
 	}
 
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_F) {
+			Model.changeFiring();
+			view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring(), model.getJumping);
+			Model.changeFiring();
+		}
+		else if(e.getKeyCode() == 32){
+			Model.changeJumping();
+			view.update(
+	}
 }
