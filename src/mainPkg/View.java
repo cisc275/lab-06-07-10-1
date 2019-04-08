@@ -24,7 +24,9 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class View extends JPanel{
-	final int frameCount = 10;
+	final int stdFrameCnt = 10;
+	final int fireFrameCnt = 4;
+	final int jumpFrameCnt = 8;
     int picNum = 0;
     BufferedImage[][] pics;
     EOrc currentOrc;
@@ -43,8 +45,9 @@ public class View extends JPanel{
 	//Constructor: get image, segment and store in array
 	public View() { 
 		//load imgs
-		pics = new BufferedImage[EOrc.values().length][frameCount];
+		pics = new BufferedImage[EOrc.values().length][];
 		for (EOrc orc : EOrc.values()) {
+			pics[orc.ordinal()] = new BufferedImage[orc.getframeCount()];
 			BufferedImage img = createImage(orc);
 			for (int frameNum = 0; frameNum < orc.getframeCount(); frameNum++)
 				pics[orc.ordinal()][frameNum] = img.getSubimage(imgWidth * frameNum, 0, imgWidth, imgHeight);
@@ -91,9 +94,7 @@ public class View extends JPanel{
 		
 		xLoc = x;
 		yLoc = y;
-		if(!stoppedMovement) {
-			picNum = (picNum + 1) % frameCount;
-		}		
+		
 		if (firing) {
 			switch (dir) {
 			case NORTH: currentOrc = EOrc.fireNorth; break;
@@ -105,6 +106,9 @@ public class View extends JPanel{
 			case WEST: currentOrc = EOrc.fireWest; break;
 			case NORTHWEST: currentOrc = EOrc.fireNorthWest; break;
 			}
+			if(!stoppedMovement) {
+				picNum = (picNum + 1) % fireFrameCnt;
+			}		
 		}
 		else if(jumping) {
 			switch (dir) {
@@ -117,6 +121,9 @@ public class View extends JPanel{
 			case WEST: currentOrc = EOrc.jumpWest; break;
 			case NORTHWEST: currentOrc = EOrc.jumpNorthWest; break;
 			}
+			if(!stoppedMovement) {
+				picNum = (picNum + 1) % jumpFrameCnt;
+			}		
 		}
 		else {
 			//Direction -> EOrc
@@ -132,6 +139,9 @@ public class View extends JPanel{
 			case WEST: currentOrc = EOrc.west; break;
 			case NORTHWEST: currentOrc = EOrc.northWest; break;
 			}	
+			if(!stoppedMovement) {
+				picNum = (picNum + 1) % stdFrameCnt;
+			}		
 		}
 		try {
 			frame.repaint();

@@ -12,7 +12,7 @@ import javax.swing.JFrame;
  * Do not modify this file without permission from your TA.
  **/
 
-public class Controller implements KeyListener{
+public class Controller{
 
 	private Model model;
 	private View view;
@@ -40,9 +40,42 @@ public class Controller implements KeyListener{
 			
 			Model.changeMoving();
 		}
-		
-		
+    	});
+    	JFrame f = view.getFrame();
+    	f.addKeyListener(new KeyListener() {
+    		@Override
+    		public void keyReleased(KeyEvent arg0) {
+    			System.out.println("here2");
+
+    			// TODO Auto-generated method stub
+    			
+    		}
+
+    		@Override
+    		public void keyTyped(KeyEvent e) {
+    			System.out.println("here3");
+
+    			// TODO Auto-generated method stub
+    			
+    		}
     		
+    		@Override
+    		public void keyPressed(KeyEvent e) {
+    			System.out.println("here");
+
+    			if (e.getKeyCode() == KeyEvent.VK_F) {
+    				System.out.println("f is pressed");
+    				Model.changeFiring();
+    				view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring(), model.getJumping());
+    				//Model.changeFiring();
+    			}
+    			else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+    				System.out.println("space is pressed");
+    				Model.changeJumping();
+    				view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring(), model.getJumping());
+    				//Model.changeJumping();
+    			}
+    		}
     	});
 		for(int i = 0; i < 5000; i++)
 		{
@@ -55,37 +88,5 @@ public class Controller implements KeyListener{
 
 	}
 
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		System.out.println("here2");
-
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		System.out.println("here3");
-
-		// TODO Auto-generated method stub
-		
-	}
 	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		System.out.println("here");
-
-		if (e.getKeyCode() == KeyEvent.VK_F) {
-			System.out.println("f is pressed");
-			Model.changeFiring();
-			view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring(), model.getJumping());
-			//Model.changeFiring();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_SPACE){
-			System.out.println("space is pressed");
-			Model.changeJumping();
-			view.update(model.getX(), model.getY(), model.getDirect(), model.getStopMoving(), model.getFiring(), model.getJumping());
-			//Model.changeJumping();
-		}
-	}
 }
