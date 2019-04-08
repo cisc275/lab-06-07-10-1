@@ -13,3 +13,8 @@ lab6 and lab7
     make the button which toggles a bool
     
     if the bool is true (orc is stopped), don't run [x,y]loc += [x,y]Vel in Model.java
+4. implement key presses
+	
+	keylistener and actionlistner should be in controller
+		should be implemented in keyPressed
+		Parameter: KeyEvent e - e.getKeyCode()

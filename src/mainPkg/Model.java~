@@ -70,10 +70,6 @@ public class Model{
 	public boolean getFiring() {
 		return firing;
 	}
-
-	public boolean getJumping() {
-		return jumping;
-	}
 	
 	public static void changeFiring() {
 		firing ^= true;

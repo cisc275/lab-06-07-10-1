@@ -110,49 +110,32 @@ public class View extends JPanel{
 				e.printStackTrace();
 			}
 		}
-		else if(jumping) {
-			switch (dir) {
-			case NORTH: currentOrc = EOrc.jumpNorth; break;
-			case NORTHEAST: currentOrc = EOrc.jumpNorthEast; break;
-			case EAST: currentOrc = EOrc.jumpEast; break;
-			case SOUTHEAST: currentOrc = EOrc.jumpSouthEast; break;
-			case SOUTH: currentOrc = EOrc.jumpSouth; break;
-			case SOUTHWEST: currentOrc = EOrc.jumpSouthWest; break;
-			case WEST: currentOrc = EOrc.jumpWest; break;
-			case NORTHWEST: currentOrc = EOrc.jumpNorthWest; break;
-			}
-			try {
-				frame.repaint();
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+		
+
 		else {
-			xLoc = x;
-			yLoc = y;
-			picNum = (picNum + 1) % frameCount;
-			//Direction -> EOrc
-			//I would rather this be inside one the the enums or just have a single enum, but apparently the code for it has to be 
-			//here so let's go with this for now
-			switch(dir) {
-			case NORTH: currentOrc = EOrc.north; break;
-			case NORTHEAST: currentOrc = EOrc.northEast; break;
-			case EAST: currentOrc = EOrc.east; break;
-			case SOUTHEAST: currentOrc = EOrc.southEast; break;
-			case SOUTH: currentOrc = EOrc.south; break;
-			case SOUTHWEST: currentOrc = EOrc.southWest; break;
-			case WEST: currentOrc = EOrc.west; break;
-			case NORTHWEST: currentOrc = EOrc.northWest; break;
-			}
-			
-			try {
-				frame.repaint();
-				Thread.sleep(100);
-			} 
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		xLoc = x;
+		yLoc = y;
+		picNum = (picNum + 1) % frameCount;
+		//Direction -> EOrc
+		//I would rather this be inside one the the enums or just have a single enum, but apparently the code for it has to be 
+		//here so let's go with this for now
+		switch(dir) {
+		case NORTH: currentOrc = EOrc.north; break;
+		case NORTHEAST: currentOrc = EOrc.northEast; break;
+		case EAST: currentOrc = EOrc.east; break;
+		case SOUTHEAST: currentOrc = EOrc.southEast; break;
+		case SOUTH: currentOrc = EOrc.south; break;
+		case SOUTHWEST: currentOrc = EOrc.southWest; break;
+		case WEST: currentOrc = EOrc.west; break;
+		case NORTHWEST: currentOrc = EOrc.northWest; break;
+		}
+		
+		try {
+			frame.repaint();
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		}
 	}
 	
@@ -161,14 +144,14 @@ public class View extends JPanel{
 		try {
 			BufferedImage bufferedImage = ImageIO.read(new File(orc.getFile()));
 			return bufferedImage;
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(pics[currentOrc.ordinal()][picNum], xLoc, yLoc, Color.gray, this);
+		g.drawImage(pics[currentOrc.ordinal()][picNum], 
+				xLoc, yLoc, Color.gray, this);
     }
 }
