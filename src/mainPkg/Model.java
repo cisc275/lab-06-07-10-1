@@ -35,10 +35,7 @@ public class Model{
 	}
 
 	public void updateLocationAndDirection() {
-		if (stopMoving) {
-			
-		}
-		else {
+		if(!stopMoving){
 			if(xloc < 0 || xloc > width - imgWidth) {
 				xVel *= -1;
 			}

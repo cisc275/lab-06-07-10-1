@@ -52,15 +52,21 @@ public class View extends JPanel{
 		//make frame
 		frame = new JFrame();
 		b = new JButton(buttonText);
+		b.setFocusable(false);
     	frame.add(b);
     	frame.getContentPane().add(this);
     	frame.setBackground(Color.gray);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	frame.setSize(frameWidth, frameHeight);
     	frame.setVisible(true);
+    	frame.setFocusable(true);
+    	frame.requestFocus();
 	}
 	public JButton getButton() {
 		return b;
+	}
+	public JFrame getFrame() {
+		return frame;
 	}
 	public int getWidth(){
 		return frameWidth;
@@ -83,15 +89,11 @@ public class View extends JPanel{
 
 	public void update(int x, int y, Direction dir, boolean stoppedMovement, boolean firing, boolean jumping){
 		
-		if (stoppedMovement) {
-			try {
-				frame.repaint();
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}	
-		}
-		
+		xLoc = x;
+		yLoc = y;
+		if(!stoppedMovement) {
+			picNum = (picNum + 1) % frameCount;
+		}		
 		if (firing) {
 			switch (dir) {
 			case NORTH: currentOrc = EOrc.fireNorth; break;
@@ -102,12 +104,6 @@ public class View extends JPanel{
 			case SOUTHWEST: currentOrc = EOrc.fireSouthWest; break;
 			case WEST: currentOrc = EOrc.fireWest; break;
 			case NORTHWEST: currentOrc = EOrc.fireNorthWest; break;
-			}
-			try {
-				frame.repaint();
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
 		else if(jumping) {
@@ -121,17 +117,8 @@ public class View extends JPanel{
 			case WEST: currentOrc = EOrc.jumpWest; break;
 			case NORTHWEST: currentOrc = EOrc.jumpNorthWest; break;
 			}
-			try {
-				frame.repaint();
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 		else {
-			xLoc = x;
-			yLoc = y;
-			picNum = (picNum + 1) % frameCount;
 			//Direction -> EOrc
 			//I would rather this be inside one the the enums or just have a single enum, but apparently the code for it has to be 
 			//here so let's go with this for now
@@ -144,15 +131,14 @@ public class View extends JPanel{
 			case SOUTHWEST: currentOrc = EOrc.southWest; break;
 			case WEST: currentOrc = EOrc.west; break;
 			case NORTHWEST: currentOrc = EOrc.northWest; break;
-			}
-			
-			try {
-				frame.repaint();
-				Thread.sleep(100);
-			} 
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			}	
+		}
+		try {
+			frame.repaint();
+			Thread.sleep(100);
+		} 
+		catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 	
