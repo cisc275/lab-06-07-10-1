@@ -106,9 +106,9 @@ public class View extends JPanel{
 			case WEST: currentOrc = EOrc.fireWest; break;
 			case NORTHWEST: currentOrc = EOrc.fireNorthWest; break;
 			}
-			if(!stoppedMovement) {
-				picNum = (picNum + 1) % fireFrameCnt;
-			}		
+			
+			picNum = (picNum + 1) % fireFrameCnt;
+				
 		}
 		else if(jumping) {
 			switch (dir) {
@@ -121,9 +121,7 @@ public class View extends JPanel{
 			case WEST: currentOrc = EOrc.jumpWest; break;
 			case NORTHWEST: currentOrc = EOrc.jumpNorthWest; break;
 			}
-			if(!stoppedMovement) {
-				picNum = (picNum + 1) % jumpFrameCnt;
-			}		
+			picNum = (picNum + 1) % jumpFrameCnt;	
 		}
 		else {
 			//Direction -> EOrc
